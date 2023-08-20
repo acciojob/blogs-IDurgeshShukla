@@ -4,6 +4,7 @@ package com.driver.models;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ class Blog {
         return blogId;
     }
 
-    public void setBlogId(Integer blogId) {
+    public void setId(Integer blogId) {
         this.blogId = blogId;
     }
 
@@ -29,11 +30,7 @@ class Blog {
         this.user = user;
     }
 
-    public Integer getBlogId() {
-        return blogId;
-    }
-
-    public LocalDate getPubDate() {
+    public Date getPubDate() {
         return pubDate;
     }
 
@@ -41,7 +38,7 @@ class Blog {
 
     private String content;
 
-    private LocalDate pubDate;
+    private Date pubDate;
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
@@ -83,7 +80,7 @@ class Blog {
     public Blog() {
     }
 
-    public void setPubDate(LocalDate pubDate) {
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
 
@@ -91,6 +88,5 @@ class Blog {
         this.title = title;
         this.content = content;
         this.user = user;
-        this.pubDate = LocalDate.now();
     }
 }
