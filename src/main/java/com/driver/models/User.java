@@ -13,6 +13,8 @@ class User{
     private Integer userId;
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Blog> blogList = new ArrayList<>();
 
@@ -51,8 +53,27 @@ class User{
         return userId;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public User(String username, String password) {
         this.username = username;
+        String arr[] = username.split(" ");
+        this.firstName = arr[0];
+        this.lastName = arr[1];
         this.password = password;
     }
 

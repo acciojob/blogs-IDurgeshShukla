@@ -1,6 +1,7 @@
 package com.driver.models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table
@@ -11,6 +12,7 @@ class Image{
     private Integer imageId;
    private String dimensions;
    private String description;
+   private Date pubdate;
 
     public Blog getBlog() {
         return blog;
@@ -30,7 +32,7 @@ class Image{
         return imageId;
     }
 
-    public void setImageId(Integer imageId) {
+    public void setId(Integer imageId) {
         this.imageId = imageId;
     }
 
@@ -53,5 +55,13 @@ class Image{
     public Image( String description,String dimensions) {
         this.dimensions = dimensions;
         this.description = description;
+    }
+
+    public Date getPubdate() {
+        return pubdate;
+    }
+
+    public void setPubdate(Date pubdate) {
+        this.pubdate = pubdate;
     }
 }
