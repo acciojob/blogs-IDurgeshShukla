@@ -15,34 +15,26 @@ public class ImageController {
     @PostMapping("/{blogId}/add-image")
     public ResponseEntity<String> addImage(@PathVariable int blogId, @RequestParam String description, @RequestParam String dimensions) {
         // Add image into the give blog
-        try {
+
             Image image = imageService.addImage(blogId, description, dimensions);
             return new ResponseEntity<>("Added image successfully", HttpStatus.OK);
-        } catch (Exception e){
-            return new ResponseEntity<>("failed" + e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+
     }
 
     @GetMapping("/countImagesInScreen/{id}/{screenDimensions}")
     public ResponseEntity<Integer> countImagesInScreen(@PathVariable int id, @PathVariable String screenDimensions){
-        try {
+
             int count =  imageService.countImagesInScreen(id,screenDimensions);
             return new ResponseEntity<>(count, HttpStatus.OK);
-        } catch (Exception e){
-            return new ResponseEntity<>(0,HttpStatus.NOT_FOUND);
-        }
+
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteImage(@PathVariable int id) {
         // delete image using deleteById
-        try {
             imageService.deleteImage(id);
             return new ResponseEntity<>(HttpStatus.OK);
-        }
-        catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        }
+
     }
 }
 

@@ -17,11 +17,11 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository;
 
-    public Image addImage(Integer blogId, String description, String dimensions) throws Exception{
+    public Image addImage(Integer blogId, String description, String dimensions) {
         //add an image to the blog
        Image image = new Image(description,dimensions);
        Optional<Blog> blogOptional = blogRepository.findById(blogId);
-       if(!blogOptional.isPresent()) throw new Exception();
+       if(!blogOptional.isPresent()) return new Image();
        Blog blog = blogOptional.get();
        blog.getImageList().add(image);
        image.setBlog(blog);
@@ -33,10 +33,10 @@ public class ImageService {
         if (imageRepository.existsById(id)) imageRepository.deleteById(id);
     }
 
-    public int countImagesInScreen(Integer id, String screenDimensions) throws Exception {
+    public int countImagesInScreen(Integer id, String screenDimensions)  {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
         Optional<Image> optionalImage = imageRepository.findById(id);
-        if(!optionalImage.isPresent()) throw new Exception("invalid id");
+        if(!optionalImage.isPresent()) return -1;
         Image image = optionalImage.get();
         String []arr = image.getDimensions().split("X");
         int  width = Integer.parseInt(arr[0]);

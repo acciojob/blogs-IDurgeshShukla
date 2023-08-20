@@ -25,10 +25,10 @@ public class BlogService {
     @Autowired
     UserRepository userRepository1;
 
-    public Blog createAndReturnBlog(Integer userId, String title, String content) throws Exception {
+    public Blog createAndReturnBlog(Integer userId, String title, String content)  {
         //create a blog at the current time
         Optional<User> optionalUser = userRepository1.findById(userId);
-        if(!optionalUser.isPresent()) throw new Exception("invalid user");
+        if(!optionalUser.isPresent()) return new Blog();
         User user = optionalUser.get();
         Blog blog = new Blog(title,content, user);
         blog.setUser(user);
@@ -37,10 +37,10 @@ public class BlogService {
         return blog;
     }
 
-    public void deleteBlog(int blogId) throws Exception {
+    public void deleteBlog(int blogId)  {
         //delete blog and corresponding images
         Optional<Blog> optionalBlog = blogRepository1.findById(blogId);
-        if(!optionalBlog.isPresent()) throw  new Exception("blogId is invalid");
+        if(!optionalBlog.isPresent()) return;
         Blog blog = optionalBlog.get();
         blogRepository1.deleteById(blogId);
     }

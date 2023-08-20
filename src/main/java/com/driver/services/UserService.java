@@ -20,16 +20,16 @@ public class UserService {
         return user;
     }
 
-    public void deleteUser(int userId) throws Exception {
+    public void deleteUser(int userId) {
             Optional<User> userOptional = userRepository3.findById(userId);
-            if(!userOptional.isPresent()) throw new Exception("Invalid Id");
+            if(!userOptional.isPresent()) return;
         User user = userOptional.get();
         userRepository3.deleteById(userId);
     }
 
-    public User updateUser(Integer id, String password) throws Exception {
+    public User updateUser(Integer id, String password) {
         Optional<User> userOptional = userRepository3.findById(id);
-        if(!userOptional.isPresent()) throw new Exception("Invalid Id");
+        if(!userOptional.isPresent()) return new User();
         User user = userOptional.get();
         user.setPassword(password);
         return user;
