@@ -18,7 +18,7 @@ class User{
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Blog> blogList = new ArrayList<>();
 
-    public void setUserId(Integer userId) {
+    public void setId(Integer userId) {
         this.userId = userId;
     }
 
@@ -49,7 +49,7 @@ class User{
         this.password = password;
     }
 
-    public Integer getUserId() {
+    public Integer getId() {
         return userId;
     }
 

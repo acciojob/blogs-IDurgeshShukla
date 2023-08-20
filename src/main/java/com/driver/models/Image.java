@@ -12,7 +12,6 @@ class Image{
     private Integer imageId;
    private String dimensions;
    private String description;
-   private Date pubdate;
 
     public Blog getBlog() {
         return blog;
@@ -28,7 +27,7 @@ class Image{
     public Image() {
     }
 
-    public Integer getImageId() {
+    public Integer getId() {
         return imageId;
     }
 
@@ -57,11 +56,4 @@ class Image{
         this.description = description;
     }
 
-    public Date getPubdate() {
-        return pubdate;
-    }
-
-    public void setPubdate(Date pubdate) {
-        this.pubdate = pubdate;
-    }
 }

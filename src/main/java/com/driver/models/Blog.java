@@ -3,9 +3,7 @@ package com.driver.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,7 +14,7 @@ class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer blogId;
 
-    public Integer getBlogId() {
+    public Integer getId() {
         return blogId;
     }
 
@@ -29,6 +27,14 @@ class Blog {
         this.title = title;
         this.content = content;
         this.user = user;
+    }
+
+    public Integer getBlogId() {
+        return blogId;
+    }
+
+    public LocalDate getPubDate() {
+        return pubDate;
     }
 
     private String title;
