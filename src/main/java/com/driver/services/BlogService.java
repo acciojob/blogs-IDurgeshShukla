@@ -26,6 +26,7 @@ public class BlogService {
     public Blog createAndReturnBlog(Integer userId, String title, String content) {
         //create a blog at the current time
         Optional<User> optionalUser = userRepository1.findById(userId);
+        if (!optionalUser.isPresent()) return new Blog();
         User user = optionalUser.get();
         Blog blog = new Blog(title,content);
         user.getBlogList().add(blog);
@@ -37,6 +38,7 @@ public class BlogService {
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
+        if (!blogRepository1.existsById(blogId)) return;
         blogRepository1.deleteById(blogId);
     }
 }

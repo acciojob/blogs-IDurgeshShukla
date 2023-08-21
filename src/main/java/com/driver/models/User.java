@@ -22,9 +22,6 @@ public class User {
 
     public User(String username, String password) {
         this.username = username;
-        String arr[] = username.split(" ");
-        this.firstName = arr[0];
-        this.lastName = arr[1];
         this.password = password;
     }
 

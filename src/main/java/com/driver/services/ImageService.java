@@ -19,6 +19,7 @@ public class ImageService {
     public Image addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog
         Optional<Blog> optionalBlog = blogRepository2.findById(blogId);
+        if(!optionalBlog.isPresent()) return new Image();
         Blog blog = optionalBlog.get();
         Image image = new Image(description,dimensions);
         image.setBlog(blog);
@@ -29,7 +30,6 @@ public class ImageService {
     }
 
     public void deleteImage(Integer id){
-
         imageRepository2.deleteById(id);
 
     }
@@ -38,6 +38,7 @@ public class ImageService {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
         int count = 0;
         Optional<Image> imageOptional = imageRepository2.findById(id);
+        if (!imageOptional.isPresent()) return 0;
         Image image = imageOptional.get();
 
         String imagedimensions = image.getDimensions();

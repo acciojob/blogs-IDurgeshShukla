@@ -25,6 +25,7 @@ public class UserService {
 
     public User updateUser(Integer id, String password){
         Optional<User> userOptional = userRepository3.findById(id);
+        if(!userOptional.isPresent()) return new User();
         User user = userOptional.get();
         user.setPassword(password);
         return userRepository3.save(user);
