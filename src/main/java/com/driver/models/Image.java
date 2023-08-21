@@ -30,10 +30,11 @@ public class Image {
     private String description;
     private String dimensions;
     @ManyToOne
+    @JoinColumn
     private Blog blog;
 
-    public Image(Integer blogId, String description, String dimensions) {
-        this.blogId = blogId;
+    public Image(Blog blog, String description, String dimensions) {
+        this.blog = blog;
         this.dimensions =dimensions;
         this.description = description;
     }

@@ -1,6 +1,7 @@
 package com.driver.models;
 
 import net.minidev.json.annotate.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,12 +16,14 @@ public class Blog {
     private Integer id;
     private String title;
     private String content;
+    @CreationTimestamp
     private Date pubDate;
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
+    @JoinColumn
     private List<Image> imageList = new ArrayList<>();
 
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn
     private User user;
 
     public List<Image> getImageList() {
@@ -95,8 +98,8 @@ public class Blog {
         this.userId = userId;
     }
 
-    public Blog(Integer userId, String title, String content) {
-        this.userId = userId;
+    public Blog(User user, String title, String content) {
+        this.user = user;
         this.title = title;
         this.content = content;
     }
