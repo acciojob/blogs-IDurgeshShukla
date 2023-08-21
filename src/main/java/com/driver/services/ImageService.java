@@ -1,7 +1,6 @@
 package com.driver.services;
 
-import com.driver.models.Blog;
-import com.driver.models.Image;
+import com.driver.models.*;
 import com.driver.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,40 +12,40 @@ import java.util.Optional;
 public class ImageService {
 
     @Autowired
-    BlogRepository blogRepository;
+    BlogRepository blogRepository2;
     @Autowired
-    ImageRepository imageRepository;
+    ImageRepository imageRepository2;
 
-    public Image addImage(Integer blogId, String description, String dimensions) {
+    public Image addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog
-       Image image = new Image(description,dimensions);
-       Optional<Blog> blogOptional = blogRepository.findById(blogId);
-       if(!blogOptional.isPresent()) return new Image();
-       Blog blog = blogOptional.get();
-       blog.getImageList().add(image);
-       image.setBlog(blog);
-       imageRepository.save(image);
-       return image;
+        Optional<Blog> optionalBlog = blogRepository2.findById(blogId);
+        Blog blog = optionalBlog.get();
+        Image image = new Image(description,dimensions);
+        image.setBlog(blog);
+        imageRepository2.save(image);
+        blog.getImageList().add(image);
+        return image;
     }
 
     public void deleteImage(Integer id){
-        if (imageRepository.existsById(id)) imageRepository.deleteById(id);
+
+        imageRepository2.deleteById(id);
+
     }
 
-    public int countImagesInScreen(Integer id, String screenDimensions)  {
+    public int countImagesInScreen(Integer id, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
-        Optional<Image> optionalImage = imageRepository.findById(id);
-        if(!optionalImage.isPresent()) return -1;
-        Image image = optionalImage.get();
-        String []arr = image.getDimensions().split("X");
-        int  width = Integer.parseInt(arr[0]);
-        int height = Integer.parseInt(arr[1]);
-        int d = width*height;
-        String screen[] = screenDimensions.split("X");
-        int w = Integer.parseInt(screen[0]);
-        int h = Integer.parseInt(screen[1]);
-        int screend = w*h;
-        return d/screend;
+        int count = 0;
+        Optional<Image> imageOptional = imageRepository2.findById(id);
+        Image image = imageOptional.get();
+
+        String imagedimensions = image.getDimensions();
+        String dimensions[] = imagedimensions.split("X");
+        int d = Integer.parseInt(dimensions[0])*Integer.parseInt(dimensions[1]);
+        String size[] = screenDimensions.split("X");
+        int s = Integer.parseInt(size[0])*Integer.parseInt(size[1]);
+        return s/d;
+
 
     }
 }

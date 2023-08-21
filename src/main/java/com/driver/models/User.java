@@ -6,31 +6,34 @@ import java.util.List;
 
 @Entity
 @Table
-public
-class User{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Blog> blogList = new ArrayList<>();
 
-    public void setId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public List<Blog> getBlogList() {
-        return blogList;
-    }
-
-    public void setBlogList(List<Blog> blogList) {
-        this.blogList = blogList;
-    }
-
     public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        String arr[] = username.split(" ");
+        this.firstName = arr[0];
+        this.lastName = arr[1];
+        this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -49,10 +52,6 @@ class User{
         this.password = password;
     }
 
-    public Integer getId() {
-        return userId;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -69,12 +68,11 @@ class User{
         this.lastName = lastName;
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        String arr[] = username.split(" ");
-        this.firstName = arr[0];
-        this.lastName = arr[1];
-        this.password = password;
+    public List<Blog> getBlogList() {
+        return blogList;
     }
 
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
+    }
 }
