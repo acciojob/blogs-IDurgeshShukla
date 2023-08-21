@@ -31,8 +31,7 @@ public class BlogService {
         blog.setPubDate(new Date());
         user.getBlogList().add(blog);
         blog.setUser(user);
-        return blogRepository1.save(blog);
-
+        return blog;
     }
 
     public void deleteBlog(int blogId){

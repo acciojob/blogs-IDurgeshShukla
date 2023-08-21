@@ -16,7 +16,8 @@ public class UserService {
 
     public User createUser(String username, String password){
         User user = new User(username,password);
-       return userRepository3.save(user);
+        userRepository3.save(user);
+        return user;
     }
 
     public void deleteUser(int userId){
@@ -27,6 +28,7 @@ public class UserService {
         Optional<User> userOptional = userRepository3.findById(id);
         User user = userOptional.get();
         user.setPassword(password);
-        return userRepository3.save(user);
+         userRepository3.save(user);
+         return user;
     }
 }
