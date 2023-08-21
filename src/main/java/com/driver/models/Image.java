@@ -8,10 +8,36 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    private Integer blogId;
+
+    public Integer getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(Integer blogId) {
+        this.blogId = blogId;
+    }
+
+    public Image(Integer id, Integer blogId, String description, String dimensions, Blog blog) {
+        this.id = id;
+        this.blogId = blogId;
+        this.description = description;
+        this.dimensions = dimensions;
+        this.blog = blog;
+    }
+
     private String description;
     private String dimensions;
     @ManyToOne
     private Blog blog;
+
+    public Image(Integer blogId, String description, String dimensions) {
+        this.blogId = blogId;
+        this.dimensions =dimensions;
+        this.description = description;
+    }
+
     public Blog getBlog() {
         return blog;
     }

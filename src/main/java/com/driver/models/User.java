@@ -25,6 +25,15 @@ public class User {
         this.password = password;
     }
 
+    public User(Integer id, String username, String password, String firstName, String lastName, List<Blog> blogList) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.blogList = blogList;
+    }
+
     public Integer getId() {
         return id;
     }

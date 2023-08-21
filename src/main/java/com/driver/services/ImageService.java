@@ -19,9 +19,8 @@ public class ImageService {
     public Image addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog
         Optional<Blog> optionalBlog = blogRepository2.findById(blogId);
-        if(!optionalBlog.isPresent()) return new Image();
         Blog blog = optionalBlog.get();
-        Image image = new Image(description,dimensions);
+        Image image = new Image(blogId,description,dimensions);
         image.setBlog(blog);
         imageRepository2.save(image);
         blog.getImageList().add(image);
@@ -43,11 +42,14 @@ public class ImageService {
 
         String imagedimensions = image.getDimensions();
         String dimensions[] = imagedimensions.split("X");
-        int d = Integer.parseInt(dimensions[0])*Integer.parseInt(dimensions[1]);
-        String size[] = screenDimensions.split("X");
-        int s = Integer.parseInt(size[0])*Integer.parseInt(size[1]);
-        return s/d;
 
-
+        String image[]= imagedimensions.split("X");
+        String screen[] = screenDimensions.split("X");
+        int imagewidth = Integer.parseInt(image[0]);
+        int imagehight = Integer.parseInt(image[1]);
+        int screenswidth = Integer.parseInt(screen[0]);
+        int screenhight = Integer.parseInt(screen[1]);
+        int ans = (screenhight/imagehight)*(screenswidth/imagewidth);
+        return ans;
     }
 }

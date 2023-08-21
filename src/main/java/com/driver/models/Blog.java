@@ -75,8 +75,28 @@ public class Blog {
     public User getUser() {
         return user;
     }
+    private Integer userId;
 
-    public Blog(String title, String content) {
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Blog(Integer id, String title, String content, Date pubDate, List<Image> imageList, User user, Integer userId) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.pubDate = pubDate;
+        this.imageList = imageList;
+        this.user = user;
+        this.userId = userId;
+    }
+
+    public Blog(Integer userId, String title, String content) {
+        this.userId = userId;
         this.title = title;
         this.content = content;
     }
